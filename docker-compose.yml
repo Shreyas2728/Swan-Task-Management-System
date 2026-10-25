@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  swan-task-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: swan_task_management_system
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=file:./dev.db
+      - JWT_SECRET=swan_production_jwt_secret_2026_docker
+      - NEXT_PUBLIC_APP_URL=http://localhost:3000
+    volumes:
+      - task_data:/app/prisma
+
+volumes:
+  task_data:
